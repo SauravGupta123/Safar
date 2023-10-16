@@ -7,8 +7,9 @@ import Rating from '@mui/lab/Rating';
 import mapStyles from '../../mapStyles';
 import useStyles from './styles.js';
 
-const Map = ({setCoordinates,setBounds,coordinates}) => {
-  const matches = useMediaQuery('(min-width:600px)');
+const Map = ({setCoordinates,setBounds,coordinates,places}) => {
+  
+  const isDesktop = useMediaQuery('(min-width:600px)');
   const classes = useStyles();
   
 
@@ -16,18 +17,48 @@ const Map = ({setCoordinates,setBounds,coordinates}) => {
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAsJufb2ilCHs7WktSoPfd95oIvY81TU4M" }}
+        bootstrapURLKeys={{ key: "AIzaSyBHISwv-0Gel-6acJ1iFlZi0h-BBtBllOM" }}
         defaultCenter={coordinates}
         center={coordinates}
         defaultZoom={14}
-        margin={[50, 50, 50, 50]}
+        margin={[150, 150, 50, 50]}
         options={ '' }
         onChange={(e)=>{
           setCoordinates({lat:e.center.lat,lng:e.center.lng})
           setBounds({ne:e.marginBounds.ne, sw:e.marginBounds.sw})
         }}
-        onChildClick={(child) => setChildClicked(child)}
+          onChildClick={(child) => setChildClicked(child)}
       >
+
+        {console.log(places)}
+        {
+        // places?.map((place,i)=>{
+        //   <div 
+        //     className={classes.markerContainer}
+        //     lat={Number(place.latitude)}
+        //     lng={Number(place.longitude)}
+        //     key={i}
+        //   >
+        //     {/* {console.log(isDesktop)} */}
+        //     {!isDesktop?
+        //       (
+        //       <LocationOnOutlinedIcon color='primary' fontSize='large' />
+        //       )
+        //     :(
+        //       <Paper elevation={3} className={classes.paper}>
+        //       <Typography className={classes.typography} variant="subtitle2" gutterBottom> {place.name}</Typography>
+        //       <img
+        //         className={classes.pointer}
+        //         src={place.photo ? place.photo.images.large.url :{}}
+        //       />
+        //       <Rating name="read-only" size="small" value={Number(place.rating)} readOnly />
+        //     </Paper>
+        //     )}
+
+        //   </div>
+          
+        // })
+        }
 
       </GoogleMapReact>
     </div>

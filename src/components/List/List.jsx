@@ -4,6 +4,7 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import useStyles from './styles.js';
 
 const List = ({places}) => {
+
   // const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
   const [type, setType] = useState('resturants');
@@ -38,7 +39,7 @@ const List = ({places}) => {
       <Grid container spacing={3} className={classes.list}>
         {places?.map((place,i)=>(
           <Grid item key={i} xs={12}>
-             <PlaceDetails place={place}/> 
+             <PlaceDetails place={place}/>    {/* individual place detail */}
           </Grid> 
         ))}
       </Grid>

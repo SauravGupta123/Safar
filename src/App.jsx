@@ -3,7 +3,7 @@ import { CssBaseline,Grid } from '@mui/material'
 import './App.css'
 import Header from './components/Header/Header'
 import Map from './components/Map/Map'
-import PlaceDetails from './components/PlaceDetails/PlaceDetails'
+// import PlaceDetails from './components/PlaceDetails/PlaceDetails'
 import List from './components/List/List'
 import { getPlaceData } from './api'
 
@@ -19,8 +19,8 @@ useEffect(()=>{
 
   useEffect(()=>{
     getPlaceData(bounds.sw, bounds.ne).then((data)=>{
-      console.log(data);
-        setPlaces(data);
+      console.log("Place data found",data);
+        setPlaces(data); 
     })
   },[coordinates,bounds])
 
@@ -37,6 +37,7 @@ useEffect(()=>{
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
+            places={places}
           />
         </Grid>            
       </Grid>  
