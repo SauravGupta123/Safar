@@ -45,7 +45,7 @@ function App() {
         controller.abort();
       };
     }
-  }, [bounds, coordinates]);
+  }, [ bounds]);
 
   return (
     <>
