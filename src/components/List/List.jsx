@@ -3,8 +3,8 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import useStyles from './styles.js';
 
-const List = ({places}) => {
-
+const List = ({places}, childClick) => {
+console.log(childClick);
   // const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
   const [type, setType] = useState('resturants');
