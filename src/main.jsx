@@ -6,11 +6,13 @@ import { ThemeProvider } from "@mui/styles";
 import { theme } from "./components/Header/Theme.js";
 
 ReactDOM.render(
-  <React.StrictMode>
+  
     <ThemeProvider theme={theme}>
     <App />
 
-    </ThemeProvider>
-  </React.StrictMode>,
+    </ThemeProvider>,
+  
   document.getElementById('root')
 );
+
+
