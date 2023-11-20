@@ -3,16 +3,31 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import useStyles from './styles.js';
 
-const List = ({places}, childClick) => {
-console.log(childClick);
-  // const [elRefs, setElRefs] = useState([]);
+const List = ({places, childClicked, isLoading} ) => {
+// console.log(typeof(childClicked));
+console.log({childClicked});
+
+
+  const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
   const [type, setType] = useState('resturants');
   const [rating, setRating] = useState('');
 
+  useEffect(()=>{
+      const refs= Array(places.length).fill().map((_,i)=>elRefs[i] || createRef());
+      setElRefs(refs);
+  },[places]);
+
+
   return (
     <div className={classes.container}>
       <Typography variant="h4">Food & Dining around you</Typography>
+      {isLoading?(
+        <div className={classes.loading}>
+          <CircularProgress size= "5rem"/>
+        </div>
+      ):(
+        <>
       <FormControl className={classes.formControl}>
         <InputLabel>Type</InputLabel>
         <Select
@@ -37,15 +52,15 @@ console.log(childClick);
         </Select>
       </FormControl>
       <Grid container spacing={3} className={classes.list}>
-        {places?.map((place,i)=>(
-          <Grid item key={i} xs={12}>
-             <PlaceDetails place={place}/>    {/* individual place detail */}
-          </Grid> 
-        ))}
-      </Grid>
+            {places?.map((place, i) => (
+              <Grid ref={elRefs[i]} key={i} item xs={12}>
+                <PlaceDetails selected={Number(childClicked) === i} refProp={elRefs[i]} place={place} />
+              </Grid>
+            ))}
+          </Grid>
 
-
-
+      </>
+      )}
 
     </div>
   );

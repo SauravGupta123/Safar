@@ -7,7 +7,7 @@ import resturant from '../../assets/resturant.jpeg'
 import mapStyles from '../../mapStyles';
 import useStyles from './styles.js';
 
-const Map = ({setCoordinates,setBounds,coordinates,places}) => {
+const Map = ({setCoordinates,setBounds,coordinates,places,setChildClicked}) => {
   
   const isDesktop = useMediaQuery('(min-width:600px)');
   const classes = useStyles();
@@ -24,11 +24,16 @@ const Map = ({setCoordinates,setBounds,coordinates,places}) => {
         margin={[150, 150, 50, 50]}
         options={ '' }
         onChange={(e)=>{
-          setCoordinates({lat:e.center.lat,lng:e.center.lng})
-          setBounds({ne:e.marginBounds.ne, sw:e.marginBounds.sw})
+
+          // console.log(e.marginBounds.ne)
+          // console.log(e.marginBounds.sw)
+          // setCoordinates({lat:e.center.lat,lng:e.center.lng})
+          // setBounds({ne:e.marginBounds.ne, sw:e.marginBounds.sw})
         }}
-          onChildClick={(child) => 
-            setChildClicked(child)
+          onChildClick={(child) => {
+             
+              setChildClicked(child)
+          }
           }
       >
 

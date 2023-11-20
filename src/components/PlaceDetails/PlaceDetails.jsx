@@ -7,6 +7,7 @@ import mystyles from './styles'
 import resturant from '../../assets/resturant.jpeg';
 
 const PlaceDetails = ({ place, selected, refProp }) => {
+
   if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const classes = mystyles();
 
