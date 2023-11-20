@@ -3,15 +3,14 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import useStyles from './styles.js';
 
-const List = ({places, childClicked, isLoading} ) => {
+const List = ({places, childClicked, isLoading,type,setType,rating,setRating }) => {
 // console.log(typeof(childClicked));
-console.log({childClicked});
+// console.log({childClicked});
 
 
   const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
-  const [type, setType] = useState('resturants');
-  const [rating, setRating] = useState('');
+
 
   useEffect(()=>{
       const refs= Array(places.length).fill().map((_,i)=>elRefs[i] || createRef());

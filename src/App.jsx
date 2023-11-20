@@ -21,7 +21,9 @@ function App() {
       lat: 28.593425151145183, lng: 76.95584046755368
     }
   });
-
+  const [type, setType] = useState('restaurants');
+  const [rating, setRating] = useState('');
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
   
 
   // const[bounds,setBounds]=useState(null);
@@ -58,10 +60,11 @@ function App() {
     console.log("u2 called");
 
       if(bounds){
-        getPlaceData(bounds.sw,bounds.ne)
+        getPlaceData(type,bounds.sw,bounds.ne)
         .then((data) => {
           console.log("Place data found", data);
           setPlaces(data);
+          setFilteredPlaces([])
           setisLoading(false);
         })  
         .catch((error) => {
@@ -71,19 +74,32 @@ function App() {
   
 
     
-  }, []);
+  }, [type]);
 
+  useEffect(() => {
+    const filtered = places.filter((place) => Number(place.rating) > rating);
+
+    setFilteredPlaces(filtered);
+  }, [rating]);
 
 
 
   return (
     <>
       <CssBaseline />
-      <Header />
+      <Header setCoordinates={setCoordinates}/>
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           {places && places.length > 0 ? (
-            <List places={places} childClicked={childClicked} isLoading={isLoading} />
+            <List 
+            places={filteredPlaces.length ? filteredPlaces : places}
+             childClicked={childClicked} 
+             isLoading={isLoading} 
+             type={type}
+             setType={setType}
+             rating={rating}
+             setRating={setRating}
+            />
           ) : (
             <p>No places to display</p>
           )}
@@ -93,8 +109,9 @@ function App() {
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
-            places={places}
+            places={filteredPlaces.length ? filteredPlaces : places}
             setChildClicked={setChildClicked}
+           
           />
         </Grid>
       </Grid>
