@@ -22,7 +22,7 @@ function App() {
     }
   });
   const [type, setType] = useState('restaurants');
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState('All');
   const [filteredPlaces, setFilteredPlaces] = useState([]);
   
 
